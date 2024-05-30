@@ -17,9 +17,9 @@ export class PostsController {
 
   @Get()
   @UseGuards(AuthGuard) 
-  async findOne(@Req() req: any) {
+  async findAll(@Req() req: any) {
     const userId = req.user.id;
-    return this.postsService.findOne(userId);
+    return this.postsService.findAll(userId);
   }
 
 }

@@ -36,7 +36,7 @@ export class PostsService {
     return urlRegex.test(url);
   }
 
-  async findOne(userId: number) {
+  async findAll(userId: number) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
     if (!user) {

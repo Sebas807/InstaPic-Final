@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req } from '@nestjs/common';
 import { FollowersService } from './followers.service';
 import { CreateFollowerDto } from './dto/create-follower.dto';
 import { UpdateFollowerDto } from './dto/update-follower.dto';
@@ -24,5 +24,12 @@ export class FollowersController {
   @UseGuards(AuthGuard)
   async getRequestsForUser(@Param('userId') userId: number) {
     return this.followersService.getRequestsForUser(userId);
+  }
+
+  @Get()
+  @UseGuards(AuthGuard) 
+  async findAllPending(@Req() req: any) {
+    const userId = req.user.id;
+    return this.followersService.findAllPending(userId);
   }
 }

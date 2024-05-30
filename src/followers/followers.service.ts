@@ -45,4 +45,13 @@ export class FollowersService {
   async getRequestsForUser(userId: number) {
     return this.followerRepository.find({ where: { receiver: { id: userId } } });
   }
+
+  async findAllPending(userId: number) {
+    return this.followerRepository.find({
+      where: {
+        receiver: { id: userId },
+        status: 'pending'
+      }
+    });
+  }
 }
