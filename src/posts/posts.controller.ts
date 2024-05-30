@@ -22,4 +22,10 @@ export class PostsController {
     return this.postsService.findAll(userId);
   }
 
+  @Get()
+  @UseGuards(AuthGuard) 
+  async findOne(@Body('imageUrl') imageUrl: string) {
+    return this.postsService.findOne(imageUrl);
+  }
+
 }

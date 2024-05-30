@@ -46,4 +46,9 @@ export class PostsService {
     return this.postRepository.find({ where: { id: userId } });
   }
 
+  async findOne(url: string) {
+    const { id } = await this.postRepository.findOne({ where: { imageURL: url } });
+    return id;
+  }
+
 }
