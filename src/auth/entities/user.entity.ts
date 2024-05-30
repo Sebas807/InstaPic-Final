@@ -1,4 +1,5 @@
 import { Follower } from "src/followers/entities/follower.entity";
+import { Post } from "src/posts/entities/post.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -27,5 +28,8 @@ export class User {
   
     @OneToMany(() => Follower, request => request.receiver)
     receivedRequests: Follower[];
+
+    @OneToMany(() => Post, post => post.user)
+    posts: Post[];
 
 }

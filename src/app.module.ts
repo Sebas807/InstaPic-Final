@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { FollowersModule } from './followers/followers.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { FollowersModule } from './followers/followers.module';
       synchronize:true
     }),
     AuthModule,
-    FollowersModule
+    FollowersModule,
+    PostsModule
   ],
   controllers: [AppController],
   providers: [AppService],
