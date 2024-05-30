@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -29,6 +28,12 @@ export class AuthController {
   @UseGuards(AuthGuard)
   findOne(@Param('name') name: string) {
     return this.authService.findOne(name);
+  }
+
+  @Get('id/:id')
+  @UseGuards(AuthGuard)
+  findNameById(@Param('id') id: number) {
+    return this.authService.findNameById(id);
   }
   
 }

@@ -1,3 +1,4 @@
+import { Follower } from "src/followers/entities/follower.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -20,5 +21,11 @@ export class User {
 
     @Column({default:true})
     isActive: boolean;
+
+    @OneToMany(() => Follower, request => request.sender)
+    sentRequests: Follower[];
+  
+    @OneToMany(() => Follower, request => request.receiver)
+    receivedRequests: Follower[];
 
 }

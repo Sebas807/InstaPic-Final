@@ -65,6 +65,11 @@ export class AuthService {
     return user;
   }
 
+  async findNameById(id: number) {
+    const { name } = await this.userRepository.findOneBy({id});
+    return name;
+  }
+
   async findOne(name:string) {
     const user = await this.userRepository.findOneBy({name});
     if(!user){
