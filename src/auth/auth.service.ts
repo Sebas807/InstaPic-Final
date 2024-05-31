@@ -1,5 +1,6 @@
 import { Injectable, InternalServerErrorException, BadRequestException, UnauthorizedException, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -75,7 +76,7 @@ export class AuthService {
     if(!user){
       throw new NotFoundException(`No existe un usuario con el nombre ${name}`)
     }
-    const { password,id,isActive,email, ...rest } = user;
+    const { password,id,isActive, ...rest } = user;
     return rest;
   }
 
@@ -87,8 +88,22 @@ export class AuthService {
     });
   }
 
+  async findInfo(userId: number) {
+    const user = await this.userRepository.findOneBy({id:userId});
+    if(!user){
+      throw new NotFoundException(`No se encontró información para el usuario con el id: ${userId}`)
+    }
+    const { password,id,isActive, ...rest } = user;
+    return rest;
+  }
+
   async logout() {
     return { message: 'Logout successful' };
+  }
+
+  async updateInfo(userId: number, updateInfoDto: UpdateUserDto) {
+    await this.userRepository.update(userId, updateInfoDto);
+    return this.findInfo(userId);
   }
 
 }
