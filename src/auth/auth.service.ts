@@ -87,4 +87,8 @@ export class AuthService {
     });
   }
 
+  async logout() {
+    return { message: 'Logout successful' };
+  }
+
 }

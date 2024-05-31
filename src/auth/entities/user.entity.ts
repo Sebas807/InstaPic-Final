@@ -2,6 +2,7 @@ import { Follower } from "src/followers/entities/follower.entity";
 import { Post } from "src/posts/entities/post.entity";
 import { Comment } from "src/comments/entities/comment.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Transform } from "class-transformer";
 
 @Entity()
 export class User {
@@ -17,6 +18,10 @@ export class User {
 
     @Column('text')
     name: string;
+
+    @Transform(({ value }) => new Date(value))
+    @Column('date')
+    birthday: Date;
 
     @Column('text')
     password: string;

@@ -35,5 +35,11 @@ export class AuthController {
   findNameById(@Param('id') id: number) {
     return this.authService.findNameById(id);
   }
-  
+
+  @Post('/logout')
+  @UseGuards(AuthGuard)
+  logout(@Request() request: Request) {
+    return this.authService.logout();
+  }
+   
 }
